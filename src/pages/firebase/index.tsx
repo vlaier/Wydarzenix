@@ -2,7 +2,7 @@
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,16 +18,11 @@ const firebaseConfig = {
   measurementId: 'G-6WDPBCTN5P',
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-if (typeof window !== 'undefined') {
-  // browser code
-  const analytics = getAnalytics(app);
-  console.log(analytics);
-}
-
 export default function FirebasePage() {
-  return <div>Firebase</div>;
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+  const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+
+  return <div>FireBase</div>;
 }
